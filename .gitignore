@@ -1,0 +1,9 @@
+node_modules/
+dist/
+backend/node_modules/
+backend/agrivision.db
+backend/uploads/
+.env
+backend/.env
+*.log
+.DS_Store

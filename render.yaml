@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: agrivision-ai
+    runtime: node
+    rootDir: .
+    buildCommand: npm install && npm run build && cd backend && npm install
+    startCommand: NODE_ENV=production node backend/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: OPENWEATHER_API_KEY
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+    disk:
+      name: agrivision-data
+      mountPath: /opt/render/project/src/backend
+      sizeGB: 1
