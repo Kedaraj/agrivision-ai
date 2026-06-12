@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { User, Mail, Lock, Phone, AlertCircle, Loader2, Leaf, Eye, EyeOff } from 'lucide-react';
+import { User, Mail, Lock, Phone, AlertCircle, Loader2, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export function SignUpScreen() {
@@ -41,9 +41,11 @@ export function SignUpScreen() {
     <div style={{ height: '100%', overflowY: 'auto', padding: '24px 24px 48px', background: '#fff' }}>
       {/* Logo */}
       <div style={{ textAlign: 'center', marginBottom: 24 }}>
-        <div style={{ width: 64, height: 64, background: 'linear-gradient(135deg,#22c55e,#34d399)', borderRadius: 22, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px', boxShadow: '0 8px 28px rgba(34,197,94,0.35)' }}>
-          <Leaf size={30} color="#fff" />
-        </div>
+        <img
+          src="/logo.png"
+          alt="AgriVision AI Logo"
+          style={{ width: 76, height: 76, borderRadius: 22, objectFit: 'cover', margin: '0 auto 14px', display: 'block', boxShadow: '0 8px 28px rgba(34,197,94,0.35)' }}
+        />
         <h1 style={{ fontSize: 26, fontWeight: 800, color: '#111827', marginBottom: 4 }}>Create Account 🌱</h1>
         <p style={{ color: '#6b7280', fontSize: 13 }}>Join thousands of smart farmers</p>
       </div>

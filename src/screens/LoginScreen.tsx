@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Mail, Lock, AlertCircle, Loader2, Leaf, Eye, EyeOff } from 'lucide-react';
+import { Mail, Lock, AlertCircle, Loader2, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export function LoginScreen() {
@@ -31,9 +31,11 @@ export function LoginScreen() {
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '32px 24px', background: '#fff' }}>
       {/* Logo */}
       <div style={{ textAlign: 'center', marginBottom: 36 }}>
-        <div style={{ width: 72, height: 72, background: 'linear-gradient(135deg,#22c55e,#34d399)', borderRadius: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', boxShadow: '0 8px 32px rgba(34,197,94,0.35)' }}>
-          <Leaf size={36} color="#fff" />
-        </div>
+        <img
+          src="/logo.png"
+          alt="AgriVision AI Logo"
+          style={{ width: 90, height: 90, borderRadius: 24, objectFit: 'cover', margin: '0 auto 16px', display: 'block', boxShadow: '0 8px 32px rgba(34,197,94,0.35)' }}
+        />
         <h1 style={{ fontSize: 30, fontWeight: 800, color: '#111827', marginBottom: 6 }}>AgriVision AI</h1>
         <p style={{ color: '#6b7280', fontSize: 14 }}>Sign in to your farm dashboard</p>
       </div>

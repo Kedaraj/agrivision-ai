@@ -49,8 +49,8 @@ export function ProfileScreen() {
         {/* Hero card */}
         <div style={{ background: 'linear-gradient(135deg,#22c55e,#34d399)', borderRadius: 28, padding: 22, marginBottom: 16, boxShadow: '0 8px 32px rgba(34,197,94,0.3)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 }}>
-            <div style={{ width: 64, height: 64, background: 'rgba(255,255,255,0.25)', border: '2px solid rgba(255,255,255,0.4)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <User size={30} color="#fff" />
+            <div style={{ width: 64, height: 64, background: 'rgba(255,255,255,0.25)', border: '2px solid rgba(255,255,255,0.4)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
+              <img src="/logo.png" alt="AgriVision" style={{ width: 64, height: 64, objectFit: 'cover' }} />
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               {editing ? (

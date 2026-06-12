@@ -60,9 +60,12 @@ export function HomeScreen() {
       <div style={{ padding: '0 20px' }}>
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: 36, marginBottom: 22 }}>
-          <div>
-            <p style={{ color: '#6b7280', fontSize: 13, marginBottom: 2 }}>{greeting} 🌾</p>
-            <h1 style={{ fontSize: 26, fontWeight: 800, color: '#111827' }}>{firstName}</h1>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <img src="/logo.png" alt="AgriVision AI" style={{ width: 44, height: 44, borderRadius: 14, objectFit: 'cover', boxShadow: '0 4px 14px rgba(34,197,94,0.3)' }} />
+            <div>
+              <p style={{ color: '#6b7280', fontSize: 13, marginBottom: 2 }}>{greeting} 🌾</p>
+              <h1 style={{ fontSize: 22, fontWeight: 800, color: '#111827' }}>{firstName}</h1>
+            </div>
           </div>
           <button onClick={() => navigate('/notifications')}
             style={{ width: 46, height: 46, background: '#f9fafb', border: '1.5px solid #f3f4f6', borderRadius: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
