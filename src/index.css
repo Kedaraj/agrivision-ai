@@ -19,6 +19,7 @@ body {
 }
 
 /* ── Mobile Shell ─────────────────────────────────────────────────────────── */
+/* On desktop: show as a phone mockup. On real phones: fill the entire screen */
 .mobile-shell {
   width: 390px;
   height: 844px;
@@ -31,10 +32,43 @@ body {
     0 50px 100px rgba(0,0,0,0.15);
 }
 
-@media (max-width: 440px) {
-  .mobile-shell { width: 100vw; height: 100dvh; border-radius: 0; }
+/* Real mobile phones — fill full screen, no borders */
+@media (max-width: 480px) {
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #fff;
+  }
+  body {
+    align-items: flex-start;
+    min-height: 100dvh;
+  }
+  #root {
+    width: 100%;
+    height: 100dvh;
+    align-items: stretch;
+  }
+  .mobile-shell {
+    width: 100vw;
+    height: 100dvh;
+    height: -webkit-fill-available;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+  .mobile-shell {
+    width: 100vw;
+    height: 100dvh;
+    border-radius: 0;
+    box-shadow: none;
+  }
   body { background: #fff; }
 }
+
 
 /* Scrollbars */
 ::-webkit-scrollbar { width: 0; }
