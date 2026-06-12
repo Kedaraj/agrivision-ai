@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html {
+  height: 100%;
+  overflow: hidden;
+}
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -8,18 +13,21 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100%;
+  overflow: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
 #root {
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 /* ── Mobile Shell ─────────────────────────────────────────────────────────── */
-/* On desktop: show as a phone mockup. On real phones: fill the entire screen */
+/* Desktop: show as phone mockup */
 .mobile-shell {
   width: 390px;
   height: 844px;
@@ -27,51 +35,56 @@ body {
   border-radius: 48px;
   overflow: hidden;
   position: relative;
+  flex-shrink: 0;
   box-shadow:
     0 0 0 1px rgba(0,0,0,0.06),
     0 50px 100px rgba(0,0,0,0.15);
 }
 
-/* Real mobile phones — fill full screen, no borders */
-@media (max-width: 480px) {
-  html, body {
+/* ── Real mobile phones: fill entire screen ─────────────────────────────── */
+@media (max-width: 768px) {
+  html {
+    position: fixed;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    background: #fff;
   }
   body {
-    align-items: flex-start;
-    min-height: 100dvh;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    display: block;
+    overflow: hidden;
+    /* iOS safe area support */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
   }
   #root {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: block;
+    overflow: hidden;
+  }
+  .mobile-shell {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
     width: 100%;
-    height: 100dvh;
-    align-items: stretch;
-  }
-  .mobile-shell {
-    width: 100vw;
-    height: 100dvh;
-    height: -webkit-fill-available;
+    height: 100%;
     border-radius: 0;
     box-shadow: none;
+    overflow: hidden;
   }
 }
-
-/* Tablets */
-@media (min-width: 481px) and (max-width: 768px) {
-  .mobile-shell {
-    width: 100vw;
-    height: 100dvh;
-    border-radius: 0;
-    box-shadow: none;
-  }
-  body { background: #fff; }
-}
-
 
 /* Scrollbars */
 ::-webkit-scrollbar { width: 0; }
+
+/* iOS momentum scrolling — applied to all scrollable containers */
+* {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
 
 /* ── Animations ──────────────────────────────────────────────────────────── */
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -127,7 +140,7 @@ select option { background: #fff; color: #111827; }
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 82px;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-top: 1px solid rgba(0,0,0,0.07);
@@ -136,6 +149,9 @@ select option { background: #fff; color: #111827; }
   justify-content: space-around;
   padding: 0 6px 10px;
   z-index: 30;
+  /* iPhone home bar (safe area) */
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+  height: calc(82px + env(safe-area-inset-bottom));
 }
 
 /* Recharts */

@@ -21,7 +21,13 @@ function Protected({ children }: { children: React.ReactNode }) {
 function MobileShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="mobile-shell">
-      <div style={{ height: '100%', position: 'relative', background: '#fff' }}>
+      <div style={{
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+        background: '#fff',
+        overflowX: 'hidden',
+      }}>
         {children}
       </div>
     </div>
