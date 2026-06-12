@@ -1,4 +1,6 @@
-const API_BASE = 'http://localhost:4000';
+// In production (Render), frontend + backend are on the same domain — use relative URLs.
+// In dev, Vite proxy forwards /api/* to http://localhost:4000 automatically.
+const API_BASE = '';
 
 function getToken(): string | null {
   return localStorage.getItem('agrivision_token');
