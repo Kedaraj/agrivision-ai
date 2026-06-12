@@ -42,9 +42,11 @@ export function AIAssistantScreen() {
   };
 
   return (
-    <div style={{ height: '100%', display: 'flex', flexDirection: 'column', background: '#fff' }}>
-      {/* Header */}
-      <div style={{ padding: '32px 20px 14px', borderBottom: '1px solid #f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#fff' }}>
+    /* Outer container: fixed height, flex column, no own scroll */
+    <div style={{ height: '100%', display: 'flex', flexDirection: 'column', background: '#fff', overflow: 'hidden' }}>
+
+      {/* ── HEADER (fixed, doesn't scroll) ─────────────────────────── */}
+      <div style={{ padding: '32px 20px 14px', borderBottom: '1px solid #f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#fff', flexShrink: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <div style={{ width: 44, height: 44, background: 'linear-gradient(135deg,#22c55e,#34d399)', borderRadius: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 14px rgba(34,197,94,0.35)' }}>
             <Bot size={22} color="#fff" />
@@ -65,8 +67,8 @@ export function AIAssistantScreen() {
         </button>
       </div>
 
-      {/* Messages */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '16px 16px 8px' }}>
+      {/* ── MESSAGES (only scrollable area) ────────────────────────── */}
+      <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', padding: '16px 16px 8px' } as React.CSSProperties}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           {msgs.map(m => (
             <div key={m.id} style={{ display: 'flex', justifyContent: m.isUser ? 'flex-end' : 'flex-start', alignItems: 'flex-end', gap: 8 }}>
@@ -96,9 +98,9 @@ export function AIAssistantScreen() {
         </div>
       </div>
 
-      {/* Quick chips */}
+      {/* ── QUICK CHIPS (only show at start) ───────────────────────── */}
       {msgs.length <= 2 && (
-        <div style={{ padding: '6px 16px 4px' }}>
+        <div style={{ padding: '6px 16px 4px', flexShrink: 0 }}>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
             {QUICK.map(q => (
               <button key={q} onClick={() => send(q)}
@@ -110,21 +112,38 @@ export function AIAssistantScreen() {
         </div>
       )}
 
-      {/* Input */}
-      <div style={{ padding: '10px 16px 90px', borderTop: '1px solid #f3f4f6', display: 'flex', gap: 10, alignItems: 'center', background: '#fff' }}>
+      {/* ── INPUT BAR — sits just above the bottom nav ──────────────── */}
+      {/* marginBottom = 82px (bottom nav height) so it's not hidden under it */}
+      <div style={{
+        flexShrink: 0,
+        marginBottom: 82,
+        padding: '10px 16px 10px',
+        borderTop: '1px solid #f3f4f6',
+        display: 'flex',
+        gap: 10,
+        alignItems: 'center',
+        background: '#fff',
+      }}>
         <input
           value={input}
           onChange={e => setInput(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && send()}
           placeholder="Ask about your crops..."
           disabled={loading}
-          style={{ flex: 1, padding: '13px 18px', background: '#f9fafb', border: '1.5px solid #e5e7eb', borderRadius: 99, fontSize: 14, color: '#111827', fontFamily: 'inherit' }}
+          style={{
+            flex: 1, padding: '13px 18px',
+            background: '#f9fafb', border: '1.5px solid #e5e7eb',
+            borderRadius: 99, fontSize: 14, color: '#111827',
+            fontFamily: 'inherit',
+          }}
         />
         <button onClick={() => send()} disabled={loading || !input.trim()}
           style={{ width: 46, height: 46, background: 'linear-gradient(135deg,#22c55e,#34d399)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 14px rgba(34,197,94,0.4)', flexShrink: 0 }}>
           {loading ? <Loader2 size={17} color="#fff" style={{ animation: 'spin 1s linear infinite' }} /> : <Send size={17} color="#fff" />}
         </button>
       </div>
+
+      {/* Bottom nav absolute-positioned at very bottom */}
       <BottomNavigation />
     </div>
   );
